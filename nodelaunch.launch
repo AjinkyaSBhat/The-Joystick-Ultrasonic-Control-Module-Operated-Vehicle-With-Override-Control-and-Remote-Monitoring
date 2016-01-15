@@ -1,0 +1,8 @@
+<launch>
+
+	<node name="joy_cmdr" pkg="beginner_tutorials" type="joy_2_arduino_twist.py"  />
+	<node name="arduino_1" pkg="rosserial_python" type="serial_node.py" args="/dev/ttyACM0" output="screen" />
+	<node name="arduino_2" pkg="rosserial_python" type="serial_node.py" args="/dev/ttyACM1" output="screen" />
+	
+	
+</launch>
