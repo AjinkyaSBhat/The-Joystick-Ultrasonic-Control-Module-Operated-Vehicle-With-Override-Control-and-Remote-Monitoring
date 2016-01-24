@@ -10,7 +10,6 @@ int echoPinA = 6;
 int trigPinB = 5 ;
 int echoPinB = 2;    
 long durationA, durationB, cmA, cmB;
-int turn_count; //will set to positive for net right movement and negative if net left movement. objective to avoid >90 turning
 
 ros::NodeHandle nh;
 
@@ -20,9 +19,7 @@ ros::Publisher ultracommand("Ultra_controller", &motor_commands);
  
                                               void setup() {
                                                 
-                                               
-                                                //Serial Port begin
-                                                Serial.begin (9600); //baud
+                                                                                      
                                                 //Define inputs and outputs
                                                 pinMode(trigPinA, OUTPUT);
                                                 pinMode(echoPinA, INPUT);
@@ -43,8 +40,6 @@ ros::Publisher ultracommand("Ultra_controller", &motor_commands);
                                                                                                           
     nh.initNode();
   nh.advertise(ultracommand);  
-
-
 
   }
  
@@ -86,10 +81,6 @@ int ultradistanceA()
   // convert the time into a distance
   cmA = (durationA/2) / 29.1;
   
-  //Serial.println(cmA);
-//  Serial.print("cm");
-//  Serial.println();
-  
   delay(20);
   return(cmA);
 
@@ -104,20 +95,12 @@ int ultradistanceB()
   delayMicroseconds(10);
   digitalWrite(trigPinB, LOW);
  
-  // Read the signal from the sensor: a HIGH pulse whose
-  // duration is the time (in microseconds) from the sending
-  // of the ping to the reception of its echo off of an object.
   pinMode(echoPinB, INPUT);
   durationB = pulseIn(echoPinB, HIGH);
  
   // convert the time into a distance
   cmB = (durationB/2) / 29.1;
   
-   //Serial.println(cmB);
-//  Serial.print("cm");
-//  Serial.println();
-  
-  //delay(20);
 return(cmB);
    
 }
@@ -128,7 +111,7 @@ void movemotorA(int dist)
   if(dist>28)
   {
     digitalWrite(9,HIGH); //A brake ON
-    motor_commands.angular.x=-1;
+    motor_commands.angular.x=-1; //signifies out of range
   }
   else if(dist>10&&dist<18)
   {
@@ -136,7 +119,6 @@ void movemotorA(int dist)
 
     digitalWrite(9,HIGH); //A brake ON
     
-    // send a zero for motor A through ROS, store in ROT matrix
     motor_commands.angular.x=dist;
     
     }
@@ -178,8 +160,6 @@ void movemotorB(int dist)
     
 
     digitalWrite(8,HIGH); //A brake ON
-    
-    // send a zero for motor A through ROS, store in ROT matrix
     motor_commands.angular.y=dist;
     
     }
