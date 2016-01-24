@@ -7,6 +7,7 @@
 
 ros::NodeHandle  nh;
 int vel_x , vel_y, distA, distB ;
+int dly_time=15; //action delay(hold) in milliseconds
 
 void messageCb( const geometry_msgs::Twist& vel_cmd){
   
@@ -69,9 +70,9 @@ void ultramove(int x, int y)
 {
   if(x==-1&&y==-1)
   {
-    //switch to joystick control if active
     STOP();
     ros::Subscriber<geometry_msgs::Twist> sub("joy_cmdr", &messageCb );
+    //switch to joystick control if active
   
   }
   else
@@ -146,7 +147,7 @@ void movemotorB(int dist)
 
 
 
-//*****************************************************************MOVEMENT FUNCTION- JOYSTICK************************************************************************///
+//*****************************************************************MOVEMENT FUNCTIONS - JOYSTICK************************************************************************///
 void moveit(int x, int y)
 {
 //Serial.println("Moving along X %d and Y %d",x,y);
@@ -164,8 +165,6 @@ void moveit(int x, int y)
       if(y>0)
       {
        
-         //while(x==0&&y>0)
-         //{
          mvFWD();
          
          ros::Subscriber<geometry_msgs::Twist> sub("joy_cmdr", &messageCb );
@@ -182,9 +181,7 @@ void moveit(int x, int y)
       else if (y==0)
       {
         STOP();
-        //switch to the ultrasonic controller module, if active
-       // ros::Subscriber<geometry_msgs::Twist> sub("Ultra_controller", &UltraCb );
-      }// takes case of only forward or back movements
+      }
    }
    
    else if (y==0)
@@ -208,8 +205,7 @@ void moveit(int x, int y)
       else if (x==0)
       {
         STOP();
-       // ros::Subscriber<geometry_msgs::Twist> sub("Ultra_controller", &UltraCb );
-      }// takes case of only right and left turns
+      }
    }
    
    else //differential motion
@@ -243,10 +239,7 @@ void moveit(int x, int y)
      else if(y==0&&x==0)
      {
        STOP();
-       //ros::Subscriber<geometry_msgs::Twist> sub("Ultra_controller", &UltraCb );
      }
-
-   
    
    }    
     
@@ -257,7 +250,7 @@ void moveit(int x, int y)
                                                                                                                   
                                                                                                              
                                                                                                              
-                                                                                                             // Unidirection MOVE COMMANDS SET 
+                                                                                                             // Unidirection movement command set
                                                                                                              
                                                                                                              
                                                                                                               void mvFWD (void)
@@ -269,7 +262,7 @@ void moveit(int x, int y)
                                                                                                                                   
                                                                                                                                   analogWrite(11,255); //set speed
                                                                                                                                   analogWrite(3,255); // set speed
-                                                                                                                                  delay(15);
+                                                                                                                                  delay(dly_time);
                                                                                                                                   
                                                                                                                 }
                                                                                                                void STOP (void)
@@ -290,7 +283,7 @@ void moveit(int x, int y)
 
                                                                                                                     analogWrite(11,255);//set speed MAX
                                                                                                                     analogWrite(3,255); // set speed MAX
-                                                                                                                    delay(15); 
+                                                                                                                    delay(dly_time); 
                                                                                                                    
                                                                                                                   }
 
@@ -303,7 +296,7 @@ void moveit(int x, int y)
 
                                                                                                                     analogWrite(11,255);//set speed MAX
                                                                                                                     analogWrite(3,255); // set speed MAX
-                                                                                                                    delay(15);
+                                                                                                                    delay(dly_time);
                                                                                                                     
                                                                                                                   }
 
@@ -316,7 +309,7 @@ void moveit(int x, int y)
                                                                                                                                   
                                                                                                                                   analogWrite(11,127);//set speed
                                                                                                                                   analogWrite(3,127); // set speed
-                                                                                                                                 delay(15);
+                                                                                                                                 delay(dly_time);
                                                                                                                                   
                                                                                                                   }
                                                                                                                   
@@ -336,7 +329,7 @@ void moveit(int x, int y)
 
   analogWrite(11,x);//set speed MAX
   analogWrite(3,y); // set speed MAX
-  delay(15);
+  delay(dly_time);
  
  }
  
@@ -350,7 +343,7 @@ void moveit(int x, int y)
 
   analogWrite(11,x);//set speed MAX
   analogWrite(3,y); // set speed MAX
-  delay(15);
+  delay(dly_time);
  
  }
  void moverightup(int x, int y)
@@ -363,7 +356,7 @@ void moveit(int x, int y)
 
   analogWrite(11,x);//set speed MAX
   analogWrite(3,y); // set speed MAX
-  delay(15);
+  delay(dly_time);
  
  }
  void moverightdown(int x, int y)
@@ -376,6 +369,6 @@ void moveit(int x, int y)
 
   analogWrite(11,x);//set speed MAX
   analogWrite(3,y); // set speed MAX
-  delay(15);
+  delay(dly_time);
  
  }
