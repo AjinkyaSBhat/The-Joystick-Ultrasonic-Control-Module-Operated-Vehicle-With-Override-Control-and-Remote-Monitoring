@@ -1,7 +1,5 @@
 
 #include <ros.h>
-#include <std_msgs/Empty.h>
-#include <std_msgs/String.h>
 #include <geometry_msgs/Twist.h>
 
 
@@ -17,7 +15,7 @@ void messageCb( const geometry_msgs::Twist& vel_cmd){
   
    vel_x=vel_cmd.linear.x;
    vel_y=vel_cmd.linear.y;
-  if((vel_x!=0||vel_y!=0)&&(distA==-1&&distB==-1))
+  if((vel_x!=0||vel_y!=0)&&(distA==-1&&distB==-1)) // Ultrasonic override if active
   {
   moveit(vel_x,vel_y);
   }
@@ -34,7 +32,6 @@ void UltraCb( const geometry_msgs::Twist& ultra_cmd)
  
  ultramove(distA,distB);
 
- 
 }
 
 ros::Subscriber<geometry_msgs::Twist> sub("joy_cmdr", &messageCb );
@@ -66,7 +63,7 @@ void loop()
 {  
   nh.spinOnce();
   delay(1);
-  //moveit(vel_x,vel_y);
+  
 }
 
 ////////////////////*********************Sensor function*****************/////////////
@@ -186,7 +183,7 @@ void moveit(int x, int y)
 //Serial.println("Moving along X %d and Y %d",x,y);
 //Serial.println("I am moving it, relax.");
 
-//By default Joystick is mapped this way using the joy2arduino node. Applies fr the Logitech F710-may vary for others 
+//By default Joystick is mapped this way using the joy_2_arduino_twist node. Applies for the Logitech F710-may vary for others due to default mapping of the joy_node
 //                        ^ Y positive
 //                        |
 //                        |
@@ -320,8 +317,8 @@ if(dist>10) // move only if no obstacle ahead
                                                                                                                 void trnRGT ()
                                                                                                                 {
                                                                                                                   
-                                                                                                                        digitalWrite(12,LOW);   //forward A
-                                                                                                                   digitalWrite(13,HIGH); //reverse B
+                                                                                                                        digitalWrite(12,LOW);  
+                                                                                                                   digitalWrite(13,HIGH); 
                                                                                                                    digitalWrite(9,LOW); //A brake off
                                                                                                                    digitalWrite(8,LOW); //B brake off
 
@@ -371,8 +368,8 @@ if(dist>10) // move only if no obstacle ahead
   digitalWrite(9,LOW); //A brake off
   digitalWrite(8,LOW); //B brake off
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);//set speed 
+  analogWrite(3,y); // set speed 
   delay(dly_time);
  
  }
@@ -380,39 +377,39 @@ if(dist>10) // move only if no obstacle ahead
  void moveleftdown(int x, int y)
  {
  
-  digitalWrite(12,LOW);   //forward A
-  digitalWrite(13,LOW); //forward B
-  digitalWrite(9,LOW); //A brake off
-  digitalWrite(8,LOW); //B brake off
+  digitalWrite(12,LOW);   
+  digitalWrite(13,LOW);
+  digitalWrite(9,LOW); 
+  digitalWrite(8,LOW); 
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);
+  analogWrite(3,y); 
   delay(dly_time);
  
  }
  void moverightup(int x, int y)
  {
  
-  digitalWrite(12,HIGH);   //forward A
-  digitalWrite(13,HIGH); //forward B
-  digitalWrite(9,LOW); //A brake off
-  digitalWrite(8,LOW); //B brake off
+  digitalWrite(12,HIGH);  
+  digitalWrite(13,HIGH); 
+  digitalWrite(9,LOW); 
+  digitalWrite(8,LOW); 
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);
+  analogWrite(3,y); 
   delay(dly_time);
  
  }
  void moverightdown(int x, int y)
  {
  
-  digitalWrite(12,LOW);   //forward A
-  digitalWrite(13,LOW); //forward B
-  digitalWrite(9,LOW); //A brake off
-  digitalWrite(8,LOW); //B brake off
+  digitalWrite(12,LOW);   
+  digitalWrite(13,LOW); 
+  digitalWrite(9,LOW); 
+  digitalWrite(8,LOW); 
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);
+  analogWrite(3,y); 
   delay(dly_time);
  
  }
