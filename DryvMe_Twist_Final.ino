@@ -1,7 +1,5 @@
 
 #include <ros.h>
-#include <std_msgs/Empty.h>
-#include <std_msgs/String.h>
 #include <geometry_msgs/Twist.h>
 
 
@@ -250,7 +248,7 @@ void moveit(int x, int y)
                                                                                                                   
                                                                                                              
                                                                                                              
-                                                                                                             // Unidirection movement command set
+                                                                                                            // Unidirection movement command set
                                                                                                              
                                                                                                              
                                                                                                               void mvFWD (void)
@@ -276,8 +274,8 @@ void moveit(int x, int y)
                                                                                                                 void trnRGT ()
                                                                                                                 {
                                                                                                                   
-                                                                                                                        digitalWrite(12,LOW);   //forward A
-                                                                                                                   digitalWrite(13,HIGH); //reverse B
+                                                                                                                        digitalWrite(12,LOW);  
+                                                                                                                   digitalWrite(13,HIGH); 
                                                                                                                    digitalWrite(9,LOW); //A brake off
                                                                                                                    digitalWrite(8,LOW); //B brake off
 
@@ -327,8 +325,8 @@ void moveit(int x, int y)
   digitalWrite(9,LOW); //A brake off
   digitalWrite(8,LOW); //B brake off
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);//set speed 
+  analogWrite(3,y); // set speed 
   delay(dly_time);
  
  }
@@ -336,39 +334,39 @@ void moveit(int x, int y)
  void moveleftdown(int x, int y)
  {
  
-  digitalWrite(12,LOW);   //forward A
-  digitalWrite(13,LOW); //forward B
-  digitalWrite(9,LOW); //A brake off
-  digitalWrite(8,LOW); //B brake off
+  digitalWrite(12,LOW);   
+  digitalWrite(13,LOW);
+  digitalWrite(9,LOW); 
+  digitalWrite(8,LOW); 
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);
+  analogWrite(3,y); 
   delay(dly_time);
  
  }
  void moverightup(int x, int y)
  {
  
-  digitalWrite(12,HIGH);   //forward A
-  digitalWrite(13,HIGH); //forward B
-  digitalWrite(9,LOW); //A brake off
-  digitalWrite(8,LOW); //B brake off
+  digitalWrite(12,HIGH);  
+  digitalWrite(13,HIGH); 
+  digitalWrite(9,LOW); 
+  digitalWrite(8,LOW); 
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);
+  analogWrite(3,y); 
   delay(dly_time);
  
  }
  void moverightdown(int x, int y)
  {
  
-  digitalWrite(12,LOW);   //forward A
-  digitalWrite(13,LOW); //forward B
-  digitalWrite(9,LOW); //A brake off
-  digitalWrite(8,LOW); //B brake off
+  digitalWrite(12,LOW);   
+  digitalWrite(13,LOW); 
+  digitalWrite(9,LOW); 
+  digitalWrite(8,LOW); 
 
-  analogWrite(11,x);//set speed MAX
-  analogWrite(3,y); // set speed MAX
+  analogWrite(11,x);
+  analogWrite(3,y); 
   delay(dly_time);
  
  }
